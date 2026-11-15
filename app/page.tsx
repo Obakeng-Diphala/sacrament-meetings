@@ -18,13 +18,13 @@ export default function HomePage() {
         <div className="mt-8 flex flex-wrap gap-4">
           <Link
             href="/meetings"
-            className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+            className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
           >
             View all meetings
           </Link>
           <Link
             href="/meetings/current"
-            className="rounded-full border border-slate-600 bg-slate-800 px-5 py-3 text-sm font-semibold text-white transition hover:border-slate-500 hover:bg-slate-700"
+            className="rounded-full border border-slate-600 bg-slate-800 px-5 py-3 text-sm font-semibold text-white transition hover:border-slate-500 hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
           >
             See current meeting
           </Link>
