@@ -28,7 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {/* Hero using next/image (local asset in public/hero.png) */}
           <header className="relative h-48 w-full">
             <Image
-              src="/hero.png"
+              src="/hero.webp"
               alt="Ward meeting hall"
               fill
               priority
