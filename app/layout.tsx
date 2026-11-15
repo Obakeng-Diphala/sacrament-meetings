@@ -1,8 +1,8 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
+import WardHero from "@/components/WardHero";
 import Footer from "@/components/Footer";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -24,23 +24,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       >
         <div className="min-h-screen flex flex-col">
           <Header wardName="Bountiful 8th Ward" />
-
-          {/* Hero using next/image (local asset in public/hero.png) */}
-          <header className="relative h-48 w-full">
-            <Image
-              src="/hero.webp"
-              alt="Ward meeting hall"
-              fill
-              priority
-              sizes="(min-width: 768px) 1200px, 100vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <h1 className="text-2xl font-bold text-white drop-shadow-md">
-                Bountiful 8th Ward
-              </h1>
-            </div>
-          </header>
+          <WardHero />
 
           <main className="flex-1">{children}</main>
           <Footer />
