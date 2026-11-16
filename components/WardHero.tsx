@@ -12,7 +12,7 @@ export default function WardHero() {
         className="object-cover object-[center_40%]"
       />
       <div className="absolute inset-0 bg-black/35" aria-hidden="true">
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="relative z-10 flex h-full items-center justify-center">
           <p className="text-2xl font-bold text-white drop-shadow-md">
             Bountiful 8th Ward
           </p>
