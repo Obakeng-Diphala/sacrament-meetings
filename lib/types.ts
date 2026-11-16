@@ -1,5 +1,6 @@
 export type MeetingType =
   | "testimony"
+  | "fast-and-testimony"
   | "regular"
   | "stake"
   | 'general';
