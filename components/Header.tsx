@@ -38,7 +38,7 @@ export default function Header({ wardName }: HeaderProps) {
                 key={item.href}
                 href={item.href}
                 className={[
-                  "rounded-full px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-sky-500 focus-visible:ring-offset-2",
+                  "rounded-full px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2",
                   isActive
                     ? "bg-slate-900 text-white"
                     : "text-slate-600 hover:bg-slate-100 hover:text-slate-900",
