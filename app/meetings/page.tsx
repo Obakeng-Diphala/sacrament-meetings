@@ -1,8 +1,13 @@
 import MeetingCard from "@/components/MeetingCard";
-import { getMeetings } from "@/lib/meetings-db";
+import type { SacramentMeeting } from "@/lib/types";
 
-export default function MeetingsPage() {
-  const meetings = getMeetings();
+export default async function MeetingsPage() {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+  const res = await fetch(`${baseUrl}/api/meetings`, {
+    cache: "no-store",
+  });
+
+  const meetings: SacramentMeeting[] = await res.json();
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-8">
