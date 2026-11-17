@@ -1,13 +1,10 @@
 import MeetingCard from "@/components/MeetingCard";
-import type { SacramentMeeting } from "@/lib/types";
+import { getMeetings } from "@/lib/meetings-db";
+
+export const dynamic = "force-dynamic";
 
 export default async function MeetingsPage() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
-  const res = await fetch(`${baseUrl}/api/meetings`, {
-    cache: "no-store",
-  });
-
-  const meetings: SacramentMeeting[] = await res.json();
+  const meetings = await getMeetings();
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-8">
