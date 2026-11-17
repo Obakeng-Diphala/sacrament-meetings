@@ -1,13 +1,13 @@
-import { neon } from '@neondatabase/serverless';
-import type { SacramentMeeting } from './types';
+import { neon } from "@neondatabase/serverless";
+import type { SacramentMeeting } from "./types";
 
 const sql = neon(process.env.DATABASE_URL!);
 
 const ITEMS_PER_PAGE = 5;
 
 export async function getMeetings(
-  query: string = '',
-  currentPage: number = 1
+  query: string = "",
+  currentPage: number = 1,
 ): Promise<SacramentMeeting[]> {
   const searchTerm = `%${query}%`;
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -34,12 +34,12 @@ export async function getMeetings(
       OR speakers::text ILIKE ${searchTerm}
     ORDER BY date DESC
     LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
-  `; 
+  `;
   return rows as unknown as SacramentMeeting[];
-} 
+}
 
 export async function getMeetingsTotalPages(
-  query: string = ''
+  query: string = "",
 ): Promise<number> {
   const searchTerm = `%${query}%`;
   const rows = await sql`
@@ -54,15 +54,15 @@ export async function getMeetingsTotalPages(
 }
 
 export async function getMeetingById(
-  id: number
+  id: number,
 ): Promise<SacramentMeeting | null> {
   const rows = await sql`
     SELECT 
       id,
       to_char(date, 'YYYY-MM-DD') AS "date",
-      meeting_type                AS "meetingType"
+      meeting_type                AS "meetingType",
       presiding, conducting, announcements,
-      opening_hymn                AS "openingHymn"
+      opening_hymn                AS "openingHymn",
       opening_prayer              AS "openingPrayer",
       ward_business               AS "wardBusiness",
       stake_business              AS "stakeBusiness",
@@ -70,25 +70,25 @@ export async function getMeetingById(
       speakers,
       closing_hymn                AS "closingHymn",
       closing_prayer              AS "closingPrayer"
-    FROM meeetings WHERE id = ${id}  
+    FROM meetings WHERE id = ${id}
   `;
   return (rows[0] as unknown as SacramentMeeting) ?? null;
 }
 
-// Mutation stubs - will be wired to the database in Week 
+// Mutation stubs - will be wired to the database in Week
 export async function addMeeting(
-  data: Omit<SacramentMeeting, 'id'>
+  data: Omit<SacramentMeeting, "id">,
 ): Promise<SacramentMeeting> {
-  throw new Error('addMeeting: database implementation coming in Week 04');
+  throw new Error("addMeeting: database implementation coming in Week 04");
 }
 
 export async function updateMeeting(
   id: number,
-  updates: Partial<SacramentMeeting>
+  updates: Partial<SacramentMeeting>,
 ): Promise<SacramentMeeting | null> {
-  throw new Error('updateMeeting: database implementation coming Week 04');
+  throw new Error("updateMeeting: database implementation coming Week 04");
 }
 
 export async function deleteMeeting(_id: number): Promise<boolean> {
-  throw new Error('deleteMeeting: database implementation coming in Week 04');
+  throw new Error("deleteMeeting: database implementation coming in Week 04");
 }
