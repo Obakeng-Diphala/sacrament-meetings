@@ -6,8 +6,8 @@ import { useDebouncedCallback } from "use-debounce";
 export function MeetingSearch() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const { replace } = useRouter();
-  
+  const { push } = useRouter();
+   
   const handleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", "1");
@@ -18,7 +18,7 @@ export function MeetingSearch() {
       params.delete("query");
     }
       
-    replace(`${pathname}?${params.toString()}`);
+    push(`${pathname}?${params.toString()}`);
     }, 300);
 
     return (
