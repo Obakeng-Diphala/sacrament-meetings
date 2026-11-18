@@ -38,6 +38,31 @@ export async function getMeetings(
   return rows as unknown as SacramentMeeting[];
 }
 
+export async function getMeetingByDate(
+  date: string,
+): Promise<SacramentMeeting | null> {
+  const rows = await sql`
+    SELECT
+      id,
+      to_char(date, 'YYYY-MM-DD') AS "date",
+      meeting_type                AS "meetingType",
+      presiding, conducting, announcements,
+      opening_hymn                AS "openingHymn",
+      opening_prayer              AS "openingPrayer",
+      ward_business               AS "wardBusiness",
+      stake_business              AS "stakeBusiness",
+      sacrament_hymn              AS "sacramentHymn",
+      speakers,
+      closing_hymn                AS "closingHymn",
+      closing_prayer              As "closingPrayer"
+    FROM meetings
+    WHERE date = ${date}::date
+    LIMIT 1
+   `;
+  
+  return (rows[0] as unknown as SacramentMeeting) ?? null;
+}
+
 export async function getMeetingsTotalPages(
   query: string = "",
 ): Promise<number> {

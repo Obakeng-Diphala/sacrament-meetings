@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import type { SacramentMeeting } from "@/lib/types";
+import { getMeetingByDate } from "@/lib/meetings-db";
 
 function formatDateInput(date: Date) {
   const year = date.getFullYear();
@@ -14,18 +14,7 @@ export default async function CurrentMeetingPage() {
   sunday.setDate(today.getDate() - today.getDay());
 
   const sundayDate = formatDateInput(sunday);
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
-
-  const res = await fetch(`${baseUrl}/api/meetings?=date${sundayDate}`, {
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    redirect("/meetings");
-  }
-
-  const meetings: SacramentMeeting[] = await res.json();
-  const meeting = meetings[0];
+  const meeting = await getMeetingByDate(sundayDate);
 
   if (!meeting) {
     redirect("/meetings");
