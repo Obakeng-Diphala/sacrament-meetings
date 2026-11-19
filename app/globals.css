@@ -100,7 +100,7 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
-    --surface: #1111827;
+    --surface: #111827;
     --muted: #9ca3af;
     --border: #374151;
     --primary: #f3f4f6;
@@ -127,7 +127,7 @@
   h1 { 
     font-size: var(--text-4xl); 
     line-height: var(--leading-tight);
-    letter-spacing: var(---tracking-tight); 
+    letter-spacing: var(--tracking-tight); 
   }
  
   h2 { 

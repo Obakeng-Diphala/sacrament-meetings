@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
-import { getMeetings } from "@/lib/meetings-db";
+import { getMeetingByDate } from "@/lib/meetings-db";
+
+export const dynamic = "force-dynamic";
 
 function formatDateInput(date: Date) {
   const year = date.getFullYear();
@@ -8,17 +10,17 @@ function formatDateInput(date: Date) {
   return `${year}-${month}-${day}`;
 }
 
-export default function CurrentMeetingPage() {
+export default async function CurrentMeetingPage() {
   const today = new Date();
   const sunday = new Date(today);
   sunday.setDate(today.getDate() - today.getDay());
 
   const sundayDate = formatDateInput(sunday);
-  const meeting = getMeetings(sundayDate)[0];
+  const meeting = await getMeetingByDate(sundayDate);
 
   if (!meeting) {
     redirect("/meetings");
   }
 
   redirect(`/meetings/${meeting.id}`);
-}
+}  
