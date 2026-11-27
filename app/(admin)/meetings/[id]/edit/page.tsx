@@ -1,15 +1,24 @@
-export default async function EditMeetingPage({
-    params,
-}: {
-    params: Promise<{ id: string }>;
-}) {
-    const { id } = await params;
-   
-    return (
-        <main className="mx-auto max-w-5xl px-4 py-8">
-            <h1 className="text-2xl font-bold text-slate-900">Edit Meeting {id}</h1>
-        </main>
-    );
-}    
+import { notFound } from "next/navigation";
+import { getMeetingById } from "@/lib/meetings-db";
+import EditMeetingForm from "./EditMeetingForm";
 
+export default async function EditMeetingPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const numericId = Number(id);
+
+  if (Number.isNaN(numericId)) {
+    notFound();
+  }
     
+  const meeting = await getMeetingById(numericId);
+
+  if (!meeting) {
+      notFound();    
+  }
+
+  return <EditMeetingForm meeting={meeting} />;
+}
